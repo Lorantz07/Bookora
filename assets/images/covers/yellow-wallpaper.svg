@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>The Yellow Wallpaper — Bookora open edition</title>
+  <defs>
+    <pattern id="wallpaper" width="132" height="164" patternUnits="userSpaceOnUse">
+      <path d="M-22 159C21 131 13 81 57 56s95-5 104 30" fill="none" stroke="#263D31" stroke-width="1.5"/>
+      <path d="M37 178c19-29 52-24 63-64 9-35-22-50-40-43" fill="none" stroke="#263D31" stroke-width=".8" opacity=".75"/>
+      <path d="M61 82c-18-4-22-20-8-27 12-6 21 4 19 16M84 64c15-10 1-26-10-17-7 6-4 15 5 18" fill="none" stroke="#263D31" stroke-width=".9"/>
+      <ellipse cx="104" cy="128" rx="8" ry="16" transform="rotate(34 104 128)" fill="none" stroke="#263D31" stroke-width=".9"/>
+      <circle cx="47" cy="55" r="3.5" fill="#263D31" opacity=".55"/>
+      <path d="M0 12h132M0 95h132" stroke="#263D31" stroke-width=".3" opacity=".4"/>
+    </pattern>
+  </defs>
+
+  <rect width="600" height="900" fill="#D7A93C"/>
+  <rect x="21" y="21" width="558" height="858" fill="none" stroke="#263D31" stroke-width="2.2"/>
+  <rect x="31" y="31" width="538" height="838" fill="none" stroke="#263D31" stroke-width=".65" opacity=".5"/>
+
+  <text x="300" y="88" text-anchor="middle" fill="#263D31" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="4">CHARLOTTE PERKINS GILMAN</text>
+  <line x1="248" y1="111" x2="352" y2="111" stroke="#A4533B" stroke-width="1"/>
+
+  <text x="300" y="238" text-anchor="middle" fill="#263D31" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-style="italic">The</text>
+  <text x="300" y="357" text-anchor="middle" fill="#263D31" font-family="Georgia, 'Times New Roman', serif" font-size="124" font-weight="bold" letter-spacing="-3">Yellow</text>
+  <text x="300" y="454" text-anchor="middle" fill="#263D31" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="bold" letter-spacing="1">Wallpaper</text>
+
+  <rect x="32" y="501" width="536" height="270" fill="url(#wallpaper)" opacity=".72"/>
+  <path d="M32 501h536" stroke="#263D31" stroke-width=".9" opacity=".55"/>
+  <path d="M32 771h536" stroke="#263D31" stroke-width=".9" opacity=".55"/>
+
+  <g transform="translate(300 636)">
+    <circle r="75" fill="#D7A93C" fill-opacity=".93" stroke="#263D31" stroke-width=".8"/>
+    <path d="M0-51c-24 0-42 19-42 42 0 23 18 41 42 41s42-18 42-41C42-32 24-51 0-51Z" fill="none" stroke="#263D31" stroke-width="1.1"/>
+    <path d="M-21 8c8-15 25-14 34-26M-14 25c9-9 22-8 28-19M8 17c4 11 15 12 22 6" fill="none" stroke="#263D31" stroke-width=".9"/>
+  </g>
+
+  <rect x="32" y="797" width="536" height="72" fill="#263D31"/>
+  <text x="300" y="826" text-anchor="middle" fill="#E6D09B" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.2">A STORY · 1892</text>
+  <text x="300" y="849" text-anchor="middle" fill="#E6D09B" opacity=".58" font-family="Arial, Helvetica, sans-serif" font-size="8.5" font-weight="600" letter-spacing="2.6">BOOKORA · OPEN EDITION</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>The Adventures of Sherlock Holmes — Bookora open edition</title>
+  <rect width="600" height="900" fill="#24332D"/>
+  <rect x="22" y="22" width="556" height="856" fill="none" stroke="#D8CBB2" stroke-width="1" opacity=".55"/>
+  <rect x="32" y="32" width="536" height="836" fill="none" stroke="#D8CBB2" stroke-width=".5" opacity=".18"/>
+
+  <text x="58" y="88" fill="#D2C4AA" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="3.7">SIR ARTHUR CONAN DOYLE</text>
+  <line x1="58" y1="112" x2="226" y2="112" stroke="#B9985F" stroke-width="1"/>
+
+  <text x="58" y="229" fill="#F0E7D7" font-family="Georgia, 'Times New Roman', serif" font-size="60" font-style="italic">The</text>
+  <text x="58" y="307" fill="#F0E7D7" font-family="Georgia, 'Times New Roman', serif" font-size="80" font-weight="bold">Adventures</text>
+  <text x="58" y="359" fill="#F0E7D7" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-style="italic" opacity=".85">of</text>
+  <text x="58" y="464" fill="#F0E7D7" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="bold" letter-spacing="-2">Sherlock</text>
+  <text x="58" y="564" fill="#D5B574" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="bold" letter-spacing="-2">Holmes</text>
+
+  <g fill="none" stroke="#D5B574">
+    <circle cx="418" cy="691" r="79" stroke-width="1.4" opacity=".8"/>
+    <circle cx="418" cy="691" r="67" stroke-width=".7" opacity=".45"/>
+    <path d="M359 632c20-14 42-19 67-14 30 6 56 30 60 59 4 31-14 58-40 72-26 14-58 8-79-9" stroke-width="1.1" opacity=".55"/>
+    <path d="M373 655c15-11 38-14 56-5 20 10 31 30 27 51-3 17-17 33-34 38" stroke-width=".8" opacity=".35"/>
+    <path d="M474 749l39 37" stroke-width="9" stroke-linecap="round" opacity=".85"/>
+    <path d="M474 749l39 37" stroke-width="3.5" stroke-linecap="round" stroke="#F0E7D7" opacity=".5"/>
+  </g>
+  <circle cx="418" cy="691" r="4" fill="#D5B574"/>
+
+  <text x="58" y="734" fill="#BBAE95" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" letter-spacing="3.2">TWELVE STORIES</text>
+  <line x1="58" y1="757" x2="216" y2="757" stroke="#D8CBB2" stroke-width=".6" opacity=".45"/>
+  <text x="58" y="797" fill="#F0E7D7" opacity=".72" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-style="italic">First published in 1892</text>
+
+  <text x="542" y="844" text-anchor="end" fill="#D2C4AA" opacity=".48" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.5">BOOKORA · OPEN EDITION</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>Habis Gelap Terbitlah Terang — Bookora open edition</title>
+  <rect width="600" height="900" fill="#A7553E"/>
+  <rect x="21" y="21" width="558" height="858" fill="none" stroke="#F2E5D0" stroke-width="1.1" opacity=".82"/>
+  <rect x="30" y="30" width="540" height="840" fill="none" stroke="#F2E5D0" stroke-width=".55" opacity=".35"/>
+
+  <text x="60" y="88" fill="#F3E6D1" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="4">R. A. KARTINI</text>
+  <text x="540" y="88" text-anchor="end" fill="#E5C48F" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" letter-spacing="2.5">1899—1904</text>
+  <line x1="60" y1="112" x2="540" y2="112" stroke="#F2E5D0" stroke-width=".7" opacity=".5"/>
+
+  <text x="60" y="252" fill="#F6EBD9" font-family="Georgia, 'Times New Roman', serif" font-size="100" letter-spacing="-3">Habis</text>
+  <text x="60" y="354" fill="#F6EBD9" font-family="Georgia, 'Times New Roman', serif" font-size="100" font-style="italic" letter-spacing="-3">Gelap</text>
+  <text x="60" y="449" fill="#E4C186" font-family="Georgia, 'Times New Roman', serif" font-size="65" letter-spacing="-1">Terbitlah</text>
+  <text x="60" y="556" fill="#F6EBD9" font-family="Georgia, 'Times New Roman', serif" font-size="103" font-weight="bold" letter-spacing="-4">Terang</text>
+
+  <g transform="translate(372 553)" fill="none" stroke="#E4C186">
+    <circle cx="0" cy="0" r="42" stroke-width="1.2" opacity=".8"/>
+    <path d="M0-61v15M0 46v15M-61 0h15M46 0h15M-43-43l11 11M32 32l11 11M43-43 32-32M-32 32l-11 11" stroke-width="1.2" opacity=".7"/>
+  </g>
+
+  <path d="M60 624h480" stroke="#F2E5D0" stroke-width=".8" opacity=".45"/>
+  <text x="60" y="659" fill="#F3E7D4" opacity=".8" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-style="italic">Letters from a Javanese mind</text>
+
+  <g opacity=".9">
+    <path d="M60 728h480" stroke="#F2E5D0" stroke-width=".7"/>
+    <path d="M154 728a146 146 0 0 1 292 0" fill="none" stroke="#E5C48F" stroke-width="1.2"/>
+    <path d="M181 728a119 119 0 0 1 238 0" fill="none" stroke="#E5C48F" stroke-width=".7" opacity=".6"/>
+    <path d="M222 728a78 78 0 0 1 156 0" fill="#E5C48F" opacity=".16"/>
+    <path d="M300 676v-18M234 690l-10-16M366 690l10-16M193 731l-16-6M407 731l16-6" stroke="#E5C48F" stroke-width="1.1" opacity=".7"/>
+  </g>
+
+  <rect x="60" y="782" width="480" height="38" fill="#263E32"/>
+  <text x="300" y="806" text-anchor="middle" fill="#F3E6D1" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.8">BOOKORA · OPEN EDITION · PUBLIC DOMAIN</text>
+</svg>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Bookora: a quiet digital reading room for public-domain books in English, Indonesian, and Malay, built without accounts, advertising, or reading profiles.">
+  <meta name="theme-color" content="#F5F2EA">
+  <title>About — Bookora</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/literata-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="icon-book-open" viewBox="0 0 24 24">
+      <path d="M12 7v14"/>
+      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+    </symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.3-4.3"/>
+    </symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <line x1="4" x2="20" y1="12" y2="12"/>
+      <line x1="4" x2="20" y1="6" y2="6"/>
+      <line x1="4" x2="20" y1="18" y2="18"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M18 6 6 18"/>
+      <path d="m6 6 12 12"/>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+      <path d="M5 12h14"/>
+      <path d="m12 5 7 7-7 7"/>
+    </symbol>
+    <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+      <path d="M7 7h10v10"/>
+      <path d="M7 17 17 7"/>
+    </symbol>
+    <symbol id="icon-arrow-up" viewBox="0 0 24 24">
+      <path d="m5 12 7-7 7 7"/>
+      <path d="M12 19V5"/>
+    </symbol>
+    <symbol id="icon-external-link" viewBox="0 0 24 24">
+      <path d="M15 3h6v6"/>
+      <path d="M10 14 21 3"/>
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+    </symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Bookora home">
+        <img class="brand__mark" src="assets/images/logo-mark.svg" width="32" height="32" alt="">
+        <span class="brand__wordmark">Bookora</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="site-nav__link" href="index.html">Home</a>
+        <a class="site-nav__link" href="explore.html">Explore</a>
+        <a class="site-nav__link" href="about.html" aria-current="page">About</a>
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="search-trigger" type="button" data-dialog-open="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-expanded="false" aria-label="Search Bookora">
+          <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+          <span class="search-trigger__label" aria-hidden="true">Search</span>
+        </button>
+        <button class="menu-trigger" type="button" data-dialog-open="nav-dialog" aria-haspopup="dialog" aria-controls="nav-dialog" aria-expanded="false" aria-label="Open navigation menu">
+          <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
+    <div class="search-dialog__panel">
+      <div class="search-dialog__top">
+        <p class="eyebrow">The catalogue</p>
+        <button class="dialog-close" type="button" data-dialog-close aria-label="Close search">
+          <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <h2 id="search-dialog-title">Search the library.</h2>
+      <p class="search-dialog__intro">Look for a title or an author. Bookora will bring together every edition in the catalogue.</p>
+      <form class="search-form search-dialog__form" action="explore.html" method="get" role="search">
+        <label class="sr-only" for="dialog-search-input">Search by title or author</label>
+        <svg class="icon search-form__icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+        <input class="search-form__input" id="dialog-search-input" type="search" name="q" placeholder="Search by title or author" autocomplete="off" spellcheck="false">
+        <button class="button button--primary" type="submit">
+          Search
+          <svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+        </button>
+      </form>
+      <div class="search-dialog__suggestions">
+        <span>Browse a shelf:</span>
+        <a href="explore.html?category=fiction">Fiction</a>
+        <a href="explore.html?category=biography">Biography</a>
+        <a href="explore.html?category=history">History</a>
+        <a href="explore.html?category=short-stories">Short stories</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="nav-dialog" id="nav-dialog" aria-labelledby="nav-dialog-title">
+    <div class="nav-dialog__inner">
+      <div class="nav-dialog__head">
+        <a class="brand" href="index.html" aria-label="Bookora home">
+          <img class="brand__mark" src="assets/images/logo-mark.svg" width="32" height="32" alt="">
+          <span class="brand__wordmark">Bookora</span>
+        </a>
+        <button class="dialog-close" type="button" data-dialog-close aria-label="Close navigation menu">
+          <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <h2 class="sr-only" id="nav-dialog-title">Bookora navigation</h2>
+      <nav class="nav-dialog__nav" aria-label="Mobile navigation">
+        <a class="nav-dialog__link" href="index.html">
+          <span class="nav-dialog__link-index" aria-hidden="true">01</span>
+          <span class="nav-dialog__link-label">Home</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+        </a>
+        <a class="nav-dialog__link" href="explore.html">
+          <span class="nav-dialog__link-index" aria-hidden="true">02</span>
+          <span class="nav-dialog__link-label">Explore</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+        </a>
+        <a class="nav-dialog__link" href="about.html" aria-current="page">
+          <span class="nav-dialog__link-index" aria-hidden="true">03</span>
+          <span class="nav-dialog__link-label">About</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+        </a>
+      </nav>
+      <div class="nav-dialog__footer">
+        <p>A quiet reading room for public-domain books. No account, no noise.</p>
+        <a class="button button--primary" href="explore.html">
+          Explore books
+          <svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <main id="main-content" class="placeholder-main">
+    <div class="container placeholder-grid">
+      <div class="placeholder-copy">
+        <p class="eyebrow">About Bookora / A reading room</p>
+        <h1>Built for <em>slow reading.</em></h1>
+        <p>Bookora is a small, independent reading room: public-domain books, presented with care, readable in the browser without an account. This first stage lays the foundations — the design system, the navigation, and the Home page.</p>
+        <div class="placeholder-actions">
+          <a class="button button--primary" href="index.html">
+            Return to the reading room
+            <svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+          </a>
+          <a class="text-link" href="index.html#reading-experience">See the reading view</a>
+        </div>
+      </div>
+
+      <aside class="placeholder-card placeholder-card--sage" aria-label="Stage 1 / Foundations">
+        <div class="placeholder-card__top">
+          <span>Stage 1 / Foundations</span>
+          <span>In preparation</span>
+        </div>
+        <h2>Typography, shelves, and a quiet interface.</h2>
+        <p>The type, colour, and layout system is in place, along with a sample shelf drawn from Project Gutenberg and Wikisource. Everything on this page is local — no external APIs are called.</p>
+        <div class="placeholder-card__rule"></div>
+        <div class="placeholder-card__foot">
+          <span>Bookora</span>
+          <span>Stage 1 / 2026</span>
+        </div>
+      </aside>
+    </div>
+    
+    <div class="container">
+      <div class="notes-grid">
+        <section class="note-section" id="sources" aria-labelledby="sources-title">
+          <p class="note-section__index" aria-hidden="true">01</p>
+          <h2 id="sources-title">Sources</h2>
+          <p>Texts are public-domain editions from <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer">Project Gutenberg</a>, <a href="https://id.wikisource.org/" target="_blank" rel="noopener noreferrer">Indonesian Wikisource</a>, and <a href="https://ms.wikisource.org/" target="_blank" rel="noopener noreferrer">Malay Wikisource</a>. Source links and licence notes are recorded in the local catalogue data and will appear with each edition in a later stage.</p>
+        </section>
+        <section class="note-section" id="privacy" aria-labelledby="privacy-title">
+          <p class="note-section__index" aria-hidden="true">02</p>
+          <h2 id="privacy-title">Privacy</h2>
+          <p>Bookora does not ask for an account and does not build reading profiles. Reading preferences are designed to stay in your browser's local storage. No analytics or advertising scripts are included in this stage.</p>
+        </section>
+        <section class="note-section" id="copyright" aria-labelledby="copyright-title">
+          <p class="note-section__index" aria-hidden="true">03</p>
+          <h2 id="copyright-title">Copyright</h2>
+          <p>The book covers on this site are original Bookora illustrations, not reproductions of publisher artwork. Public-domain texts remain in the public domain; transcription and translation credits will be shown on each edition where known.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-masthead">
+        <div>
+          <p class="eyebrow">Your digital reading space</p>
+          <h2>Read <em>slowly.</em></h2>
+        </div>
+        <a class="footer-arrow" href="explore.html" aria-label="Explore books">
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+        </a>
+      </div>
+
+      <div class="footer-columns">
+        <div class="footer-column">
+          <a class="footer-brand" href="index.html" aria-label="Bookora home">
+            <span class="footer-brand__mark" aria-hidden="true">
+              <svg class="icon"><use href="#icon-book-open"></use></svg>
+            </span>
+            <span class="footer-brand__wordmark">Bookora</span>
+          </a>
+          <p class="footer-about">A quiet digital reading room for public-domain books in English, Indonesian, and Malay. Discover, read, and return to your page — all in the browser.</p>
+          <p class="footer-privacy">No accounts. No reading profiles. Your reading preferences will stay on your device.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Read</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore books</a></li>
+            <li><a href="about.html">About Bookora</a></li>
+            <li><a href="#main-content">Back to top</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Sources &amp; rights</h3>
+          <ul>
+            <li>
+              <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer">
+                Project Gutenberg
+                <span class="sr-only">(opens in a new tab)</span>
+                <svg class="icon" aria-hidden="true"><use href="#icon-external-link"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://id.wikisource.org/" target="_blank" rel="noopener noreferrer">
+                Indonesian Wikisource
+                <span class="sr-only">(opens in a new tab)</span>
+                <svg class="icon" aria-hidden="true"><use href="#icon-external-link"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://ms.wikisource.org/" target="_blank" rel="noopener noreferrer">
+                Malay Wikisource
+                <span class="sr-only">(opens in a new tab)</span>
+                <svg class="icon" aria-hidden="true"><use href="#icon-external-link"></use></svg>
+              </a>
+            </li>
+            <li><a href="about.html#sources">Source &amp; licensing notes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <p class="footer-contact">
+            Bookora is in its first stage.<br>
+            No public contact channel yet.
+          </p>
+          <ul>
+            <li><a href="about.html#privacy">Privacy</a></li>
+            <li><a href="about.html#copyright">Copyright</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span data-current-year>2026</span> Bookora. Original cover artwork by Bookora.</span>
+        <span class="footer-bottom__note">Public-domain texts remain in the public domain. Source attribution is recorded for every book.</span>
+        <a class="footer-backtop" href="#main-content">
+          Back to top
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up"></use></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>The Great Gatsby — Bookora open edition</title>
+  <rect width="600" height="900" fill="#203C32"/>
+  <rect x="22" y="22" width="556" height="856" fill="none" stroke="#C9B184" stroke-width="1.2" opacity=".72"/>
+  <rect x="32" y="32" width="536" height="836" fill="none" stroke="#EFE5D2" stroke-width=".6" opacity=".18"/>
+
+  <text x="300" y="86" text-anchor="middle" fill="#D8C397" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" letter-spacing="4.6">F. SCOTT FITZGERALD</text>
+  <line x1="250" y1="108" x2="350" y2="108" stroke="#C9B184" stroke-width=".8" opacity=".8"/>
+
+  <g fill="none" stroke="#C9AF77" stroke-width=".9">
+    <circle cx="300" cy="250" r="104" opacity=".5"/>
+    <circle cx="300" cy="250" r="84" opacity=".3"/>
+    <circle cx="300" cy="250" r="62" opacity=".2"/>
+    <path d="M300 128v244M178 250h244M213 163l174 174M387 163 213 337" opacity=".22"/>
+    <path d="M259 223h82M259 242h82M259 261h82M259 280h82" opacity=".26"/>
+  </g>
+  <circle cx="300" cy="250" r="7" fill="#C9AF77"/>
+
+  <text x="300" y="430" text-anchor="middle" fill="#F1E7D2" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-style="italic" letter-spacing="1">The</text>
+  <text x="300" y="522" text-anchor="middle" fill="#F1E7D2" font-family="Georgia, 'Times New Roman', serif" font-size="112" font-weight="bold">Great</text>
+  <text x="300" y="644" text-anchor="middle" fill="#F1E7D2" font-family="Georgia, 'Times New Roman', serif" font-size="124" font-weight="bold" letter-spacing="-4">Gatsby</text>
+
+  <g fill="#C9AF77">
+    <rect x="283" y="681" width="34" height="1"/>
+    <rect x="291" y="679" width="5" height="5" transform="rotate(45 293.5 681.5)"/>
+    <rect x="304" y="679" width="5" height="5" transform="rotate(45 306.5 681.5)"/>
+  </g>
+
+  <text x="300" y="733" text-anchor="middle" fill="#D5C29C" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="4.2">A NOVEL · 1925</text>
+  <text x="300" y="841" text-anchor="middle" fill="#E6DDC7" opacity=".62" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8">BOOKORA · OPEN EDITION</text>
+</svg>

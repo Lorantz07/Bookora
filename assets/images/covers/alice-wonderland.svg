@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>Alice's Adventures in Wonderland — Bookora open edition</title>
+  <rect width="600" height="900" fill="#E8D7A6"/>
+  <rect x="20" y="20" width="560" height="860" fill="none" stroke="#263E32" stroke-width="2.2"/>
+  <rect x="30" y="30" width="540" height="840" fill="none" stroke="#263E32" stroke-width=".7" opacity=".55"/>
+
+  <text x="300" y="86" text-anchor="middle" fill="#263E32" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" letter-spacing="4.5">LEWIS CARROLL</text>
+  <g fill="#A4533B" font-family="Georgia, 'Times New Roman', serif" font-size="18" text-anchor="middle">
+    <text x="106" y="93">♥</text>
+    <text x="494" y="93">♦</text>
+  </g>
+
+  <text x="300" y="235" text-anchor="middle" fill="#263E32" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-style="italic" letter-spacing="-2">Alice's</text>
+  <text x="300" y="294" text-anchor="middle" fill="#A4533B" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" letter-spacing="6.2">ADVENTURES IN</text>
+  <text x="300" y="394" text-anchor="middle" fill="#263E32" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="bold" letter-spacing="-2">Wonderland</text>
+
+  <g fill="#263E32" font-family="Georgia, 'Times New Roman', serif" font-size="22" text-anchor="middle" opacity=".86">
+    <text x="300" y="439">♠ ♣ ♦ ♥</text>
+  </g>
+
+  <g transform="translate(300 654)" fill="none" stroke="#263E32">
+    <ellipse cx="0" cy="0" rx="194" ry="134" stroke-width="1.4" transform="rotate(-9)" opacity=".8"/>
+    <ellipse cx="0" cy="0" rx="158" ry="105" stroke-width="1.5" transform="rotate(-19)" opacity=".8"/>
+    <ellipse cx="0" cy="0" rx="123" ry="80" stroke-width="1.6" transform="rotate(-32)" opacity=".8"/>
+    <ellipse cx="0" cy="0" rx="89" ry="56" stroke-width="1.8" transform="rotate(-48)" opacity=".82"/>
+    <ellipse cx="0" cy="0" rx="55" ry="34" stroke-width="2" transform="rotate(-66)" opacity=".85"/>
+  </g>
+  <g transform="translate(300 654)">
+    <circle r="25" fill="#E8D7A6" stroke="#A4533B" stroke-width="1.6"/>
+    <path d="M0-12v12l9 6" fill="none" stroke="#A4533B" stroke-width="1.8" stroke-linecap="round"/>
+    <circle r="2.2" fill="#A4533B"/>
+  </g>
+
+  <g fill="#263E32" font-family="Arial, Helvetica, sans-serif" opacity=".65">
+    <circle cx="127" cy="512" r="2"/>
+    <circle cx="154" cy="479" r="1.2"/>
+    <circle cx="467" cy="527" r="1.6"/>
+    <circle cx="441" cy="480" r="1"/>
+  </g>
+
+  <text x="300" y="783" text-anchor="middle" fill="#263E32" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="4.3">DOWN THE RABBIT-HOLE</text>
+  <path d="M247 804h106" stroke="#A4533B" stroke-width="1"/>
+  <text x="300" y="842" text-anchor="middle" fill="#263E32" opacity=".58" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8">BOOKORA · OPEN EDITION</text>
+</svg>

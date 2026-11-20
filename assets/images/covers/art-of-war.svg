@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>The Art of War by Sun Tzu — Bookora open edition</title>
+  <rect width="600" height="900" fill="#CCD5C3"/>
+  <rect x="22" y="22" width="556" height="856" fill="none" stroke="#263D31" stroke-width="1.4"/>
+  <rect x="31" y="31" width="538" height="838" fill="none" stroke="#263D31" stroke-width=".55" opacity=".32"/>
+
+  <text x="58" y="88" fill="#263D31" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="4">SUN TZU</text>
+  <rect x="489" y="52" width="53" height="53" fill="#A4533B"/>
+  <text x="515.5" y="88" text-anchor="middle" fill="#F2E8D6" font-family="SimSun, 'Songti SC', serif" font-size="27">武</text>
+
+  <text x="58" y="243" fill="#263D31" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-style="italic">The</text>
+  <text x="54" y="394" fill="#263D31" font-family="Georgia, 'Times New Roman', serif" font-size="154" font-weight="bold" letter-spacing="-5">Art</text>
+  <text x="58" y="462" fill="#A4533B" font-family="Georgia, 'Times New Roman', serif" font-size="51" font-style="italic">of</text>
+  <text x="54" y="611" fill="#263D31" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="bold" letter-spacing="-5">War</text>
+
+  <g fill="none" stroke="#263D31">
+    <path d="M341 197c44 4 60 38 42 66-17 27-59 22-61-8-2-24 22-36 45-27 29 11 33 50 13 77-22 31-70 31-94 2" stroke-width="1.1" opacity=".35"/>
+    <path d="M392 165c57 1 91 38 76 79-14 40-75 47-99 11" stroke-width=".6" opacity=".22"/>
+  </g>
+
+  <path d="M58 737c80-30 143 18 221-4 80-22 144-42 258-1l7 31c-103-31-174-8-247 10-83 20-159-11-235 16Z" fill="#263D31"/>
+  <path d="M60 780c90-27 146 10 222-10 78-20 146-36 250 2" fill="none" stroke="#263D31" stroke-width="2.2" opacity=".6"/>
+
+  <text x="542" y="837" text-anchor="end" fill="#263D31" opacity=".7" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.7">BOOKORA · OPEN EDITION</text>
+  <text x="58" y="837" fill="#263D31" opacity=".78" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.8">THE OLDEST TREATISE ON STRATEGY</text>
+</svg>

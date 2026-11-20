@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>Meditations by Marcus Aurelius — Bookora open edition</title>
+  <rect width="600" height="900" fill="#EFE5D1"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#A4533B" stroke-width="1" opacity=".7"/>
+  <rect x="34" y="34" width="532" height="832" fill="none" stroke="#315846" stroke-width=".55" opacity=".3"/>
+
+  <text x="300" y="88" text-anchor="middle" fill="#315846" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="600" letter-spacing="4.4">MARCUS AURELIUS</text>
+
+  <g transform="translate(300 268)" fill="none" stroke="#A4533B">
+    <path d="M-156 52 0-82l156 134" stroke-width="1.1" opacity=".65"/>
+    <path d="M-132 52 0-65l132 117" stroke-width=".65" opacity=".3"/>
+    <path d="M-156 52h312" stroke-width="1"/>
+    <circle cx="0" cy="19" r="35" stroke-width=".8" opacity=".55"/>
+    <circle cx="0" cy="19" r="4" fill="#A4533B" stroke="none"/>
+  </g>
+
+  <text x="300" y="432" text-anchor="middle" fill="#263E32" font-family="Georgia, 'Times New Roman', serif" font-size="72" letter-spacing="5.5">MEDITATIONS</text>
+  <text x="300" y="479" text-anchor="middle" fill="#A4533B" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic">notes to himself</text>
+
+  <g transform="translate(300 602)" fill="none" stroke="#315846">
+    <path d="M-196-6v142M-196 0h392" stroke-width=".9" opacity=".6"/>
+    <g opacity=".9">
+      <path d="M-148 0v142M-124 0v142M-100 0v142" stroke-width="1.1"/>
+      <path d="M-158-9h48M-147 0v12h26V0M-134 0v12" stroke-width=".9"/>
+      <path d="M-158 142v12h48v-12" stroke-width=".9"/>
+      <path d="M-48 0v142M-24 0v142M0 0v142" stroke-width="1.1" opacity=".3"/>
+      <path d="M52 0v142M76 0v142M100 0v142" stroke-width="1.1" opacity=".42"/>
+      <path d="M152 0v142M176 0v142M200 0v142" stroke-width="1.1" opacity=".6"/>
+    </g>
+    <path d="M-196 142h392" stroke-width="1"/>
+    <path d="M-176 170h352" stroke-width=".65" opacity=".45"/>
+  </g>
+
+  <text x="300" y="794" text-anchor="middle" fill="#315846" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.2">A MANUAL FOR THE SELF</text>
+  <text x="300" y="841" text-anchor="middle" fill="#315846" opacity=".55" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8">BOOKORA · OPEN EDITION</text>
+</svg>
