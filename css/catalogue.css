@@ -1057,6 +1057,75 @@
   letter-spacing: -0.04em;
 }
 
+.edition-reader h2 em {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.edition-reader__progress {
+  margin-top: 1.15rem;
+}
+
+.edition-reader__bar {
+  height: 3px;
+  background: rgba(246, 240, 227, 0.16);
+  overflow: hidden;
+}
+
+.edition-reader__bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--gold);
+}
+
+.edition-reader__progress-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 0.8rem;
+  margin-top: 0.45rem;
+  color: rgba(246, 240, 227, 0.7);
+  font-family: var(--sans);
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.edition-reader__progress-row span:first-child {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.edition-reader__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1.15rem;
+}
+
+.edition-reader__actions .button {
+  min-height: 42px;
+  padding: 0.62rem 1rem;
+  font-size: 0.72rem;
+}
+
+.edition-reader__actions .text-link {
+  margin-top: 0;
+}
+
+.edition-reader .edition-reader__note {
+  max-width: none;
+  margin-top: 0.95rem;
+  color: rgba(246, 240, 227, 0.48);
+  font-size: 0.62rem;
+  line-height: 1.55;
+}
+
 .edition-reader p {
   max-width: 48ch;
   margin-top: 0.5rem;

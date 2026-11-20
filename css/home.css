@@ -1222,8 +1222,20 @@
   line-height: 1.6;
 }
 
+.experience__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.4rem;
+  margin-top: 1.5rem;
+}
+
 .experience__copy .text-link {
   margin-top: 1.4rem;
+}
+
+.experience__actions .text-link {
+  margin-top: 0;
 }
 
 /* Home responsive --------------------------------------------------------- */

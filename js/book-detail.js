@@ -7,6 +7,7 @@
   "use strict";
 
   const catalogue = window.Bookora;
+  const readingStore = window.BookoraReaderStore;
   const mount = document.querySelector("[data-edition]");
   const breadcrumb = document.querySelector("[data-breadcrumb-current]");
   const descriptionMeta = document.querySelector('meta[name="description"]');
@@ -73,6 +74,116 @@
     });
   }
 
+  function pluralUnit(unit, count) {
+    if (unit === "story") {
+      return count === 1 ? "story" : "stories";
+    }
+    return count === 1 ? unit : unit + "s";
+  }
+
+  function titleCase(value) {
+    return String(value).charAt(0).toUpperCase() + String(value).slice(1);
+  }
+
+  function readerCard(record) {
+    const readable = catalogue.hasReaderText(record);
+    const reader = record.reader || {};
+    const unit = reader.unit || "chapter";
+    const chapters = reader.chapters || 0;
+    const progress = readable && readingStore ? readingStore.getProgress(record.id) : null;
+    const percent = progress ? Math.min(Math.max(progress.percent, 0), 100) : 0;
+    const finished = Boolean(progress && percent >= 99);
+
+    if (!readable) {
+      const readableBooks = catalogue.getReadableBooks();
+      const count = readableBooks.length;
+      const titles = readableBooks.map(function (readableBook) {
+        return readableBook.title;
+      });
+      const titleLine = titles.length
+        ? " In the reader now: " + titles.slice(0, -1).join(", ") + (titles.length > 1 ? ", and " : "") + titles[titles.length - 1] + "."
+        : "";
+
+      return (
+        '<aside class="edition-reader" aria-labelledby="reader-status-title">' +
+          '<div class="edition-reader__head">' +
+            '<span>Read in Bookora</span>' +
+            '<span>Not yet</span>' +
+          '</div>' +
+          '<h2 id="reader-status-title">This text is <em>not in the reader yet.</em></h2>' +
+          '<p>The reader currently opens ' + count + ' complete ' + (count === 1 ? "text" : "texts") + '. This edition stays in the catalogue with its source, rights note, and edition record.</p>' +
+          '<a class="text-link" href="explore.html">Explore the catalogue' +
+            '<svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>' +
+          '</a>' +
+          '<p class="edition-reader__note">' + escapeHTML(titleLine.trim()) + '</p>' +
+        '</aside>'
+      );
+    }
+
+    const readerHref = catalogue.readerUrl(record);
+    const restartHref = catalogue.readerUrl(record, { start: true });
+    const words = reader.wordCount ? Number(reader.wordCount).toLocaleString("en-US") + " words" : "the complete text";
+    const sections = chapters
+      ? chapters + " " + pluralUnit(unit, chapters)
+      : "the complete text";
+    const place = chapters > 1
+      ? titleCase(unit) + " " + Math.min(progress ? progress.chapter + 1 : 1, chapters) + " of " + chapters
+      : titleCase(unit);
+
+    let status = "Available now";
+    let heading = "Read it <em>here.</em>";
+    let copy =
+      "The complete text — " + words + " across " + sections + " — opens in measured pages. Your place and display settings stay on this device.";
+    let primaryLabel = "Start reading";
+    let primaryHref = readerHref;
+    let secondary = "";
+
+    if (progress && finished) {
+      status = "Finished";
+      heading = "Read it <em>again.</em>";
+      copy = "You reached the end of " + escapeHTML(record.title) + ". Begin again from the first page, or reopen the place you saved.";
+      primaryLabel = "Read again";
+      primaryHref = restartHref;
+      secondary =
+        '<a class="text-link" href="' + escapeHTML(readerHref) + '">Open saved place</a>';
+    } else if (progress) {
+      status = "In progress";
+      heading = "Continue <em>reading.</em>";
+      copy = "Your place is saved on this device. Return to " + escapeHTML(place.toLowerCase()) + ", or begin again from the first page.";
+      primaryLabel = "Continue reading";
+      secondary =
+        '<a class="text-link" href="' + escapeHTML(restartHref) + '">Start over</a>';
+    }
+
+    return (
+      '<aside class="edition-reader" aria-labelledby="reader-status-title">' +
+        '<div class="edition-reader__head">' +
+          '<span>Read in Bookora</span>' +
+          '<span>' + escapeHTML(status) + '</span>' +
+        '</div>' +
+        '<h2 id="reader-status-title">' + heading + '</h2>' +
+        '<p>' + copy + '</p>' +
+        (progress
+          ? '<div class="edition-reader__progress">' +
+              '<div class="edition-reader__bar" role="img" aria-label="' + percent + '% read"><span style="width: ' + percent + '%"></span></div>' +
+              '<div class="edition-reader__progress-row">' +
+                '<span>' + percent + '% read</span>' +
+                '<span>' + escapeHTML(place) + '</span>' +
+              '</div>' +
+            '</div>'
+          : "") +
+        '<div class="edition-reader__actions">' +
+          '<a class="button button--light" href="' + escapeHTML(primaryHref) + '">' +
+            primaryLabel +
+            '<svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>' +
+          '</a>' +
+          secondary +
+        '</div>' +
+        '<p class="edition-reader__note">Progress, type size, and line height stay in this browser. No account is created.</p>' +
+      '</aside>'
+    );
+  }
+
   function pathsHTML(bookCollections) {
     if (!bookCollections.length) {
       return "";
@@ -126,6 +237,14 @@
     const language = catalogue.getLanguageForBook(record) || { id: "", name: record.language };
     const bookCollections = catalogue.getCollectionsForBook(record);
     const related = catalogue.getRelatedBooks(record, 3);
+    const readable = catalogue.hasReaderText(record);
+    const readerHref = readable ? catalogue.readerUrl(record) : "";
+    const readerAction = readable
+      ? '<a class="button button--primary" href="' + escapeHTML(readerHref) + '">' +
+          'Read in Bookora' +
+          '<svg class="icon icon--forward" aria-hidden="true"><use href="#icon-book-open"></use></svg>' +
+        '</a>'
+      : externalLink(record.sourceUrl, "View source edition", "button button--primary", true);
     const categoryHref = category.id
       ? "explore.html?category=" + encodeURIComponent(category.id)
       : "explore.html";
@@ -140,7 +259,8 @@
 
     setMeta(
       record.title + " — Bookora",
-      "Edition details for " + record.title + " by " + record.author + ", including language, source, and rights notes."
+      "Edition details for " + record.title + " by " + record.author + ", including " +
+        (readable ? "the in-browser reader, " : "") + "language, source, and rights notes."
     );
 
     if (breadcrumb) {
@@ -191,24 +311,20 @@
             '</dl>' +
 
             '<div class="edition__actions">' +
-              externalLink(record.sourceUrl, "View source edition", "button button--primary", true) +
+              readerAction +
+              externalLink(
+                record.sourceUrl,
+                readable ? "Source edition" : "View source edition",
+                "text-link",
+                true
+              ) +
               '<a class="text-link" href="explore.html">' +
                 '<svg class="icon" aria-hidden="true"><use href="#icon-arrow-left"></use></svg>' +
                 'Back to the catalogue' +
               '</a>' +
             '</div>' +
 
-            '<aside class="edition-reader" aria-labelledby="reader-status-title">' +
-              '<div class="edition-reader__head">' +
-                '<span>Read in Bookora</span>' +
-                '<span>Stage 3</span>' +
-              '</div>' +
-              '<h2 id="reader-status-title">Reader in preparation.</h2>' +
-              '<p>The in-browser reading view is not available yet. Edition notes and the source link are ready now, and the reader follows in the next stage.</p>' +
-              '<a class="text-link" href="reader.html">See what the reader will do' +
-                '<svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>' +
-              '</a>' +
-            '</aside>' +
+            readerCard(record) +
           '</div>' +
         '</header>' +
 
@@ -218,7 +334,11 @@
               '<p class="eyebrow">Edition notes</p>' +
               '<h2 id="edition-notes-title">What you are <em>looking at.</em></h2>' +
             '</div>' +
-            '<p>Bookora keeps the source, rights note, and catalogue context beside the edition. The full text remains with the archive that holds it.</p>' +
+            '<p>Bookora keeps the source, rights note, and catalogue context beside every edition. ' +
+              (readable
+                ? "This text is bundled with the site for in-browser reading, and the source edition remains with the archive that holds it."
+                : "The full text currently remains with the archive that holds it.") +
+            '</p>' +
           '</div>' +
 
           '<div class="edition-notes__grid">' +
@@ -246,7 +366,11 @@
             '<section class="edition-note">' +
               '<p class="edition-note__index" aria-hidden="true">03</p>' +
               '<h3>Source &amp; provenance</h3>' +
-              '<p>This record points to ' + escapeHTML(record.source) + '. Bookora does not host or alter the full text at this stage.</p>' +
+              '<p>This record points to ' + escapeHTML(record.source) + '. ' +
+                (readable
+                  ? "The complete text is bundled with Bookora for in-browser reading; the source edition remains at the archive."
+                  : "The full text currently stays with the source archive.") +
+              '</p>' +
               '<p>' + escapeHTML(record.license) + '. Public-domain status can differ by jurisdiction, so consult the source record before reuse.</p>' +
               '<a class="text-link" href="about.html#sources">How sourcing works' +
                 '<svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>' +
@@ -319,6 +443,12 @@
         '</div>' +
       '</section>';
   }
+
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted && book) {
+      renderBook(book);
+    }
+  });
 
   if (book) {
     renderBook(book);

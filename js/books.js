@@ -46,7 +46,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/11",
       license: "Public domain",
-      description: "A restless afternoon, a waistcoat-wearing rabbit, and a world where nothing behaves as it should."
+      description: "A restless afternoon, a waistcoat-wearing rabbit, and a world where nothing behaves as it should.",
+      reader: {
+        file: "assets/texts/alice-wonderland.json",
+        wordCount: 26268,
+        chapters: 12,
+        unit: "chapter",
+        edition: "Project Gutenberg eBook #11 · Millennium Fulcrum Edition 3.0"
+      }
     },
     {
       id: "sherlock-holmes",
@@ -140,7 +147,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/1952",
       license: "Public domain",
-      description: "A woman, a room, and a pattern that will not sit still. A landmark of short fiction."
+      description: "A woman, a room, and a pattern that will not sit still. A landmark of short fiction.",
+      reader: {
+        file: "assets/texts/the-yellow-wallpaper.json",
+        wordCount: 6078,
+        chapters: 1,
+        unit: "story",
+        edition: "Project Gutenberg eBook #1952"
+      }
     },
     {
       id: "time-machine",
@@ -153,7 +167,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/35",
       license: "Public domain",
-      description: "A Victorian inventor travels to the year 802,701 and finds a future stranger than any machine."
+      description: "A Victorian inventor travels to the year 802,701 and finds a future stranger than any machine.",
+      reader: {
+        file: "assets/texts/the-time-machine.json",
+        wordCount: 32310,
+        chapters: 17,
+        unit: "section",
+        edition: "Project Gutenberg eBook #35"
+      }
     },
     {
       id: "chemical-history-candle",
@@ -412,6 +433,22 @@
     return "book-detail.html?book=" + encodeURIComponent(book.id);
   }
 
+  function hasReaderText(book) {
+    return Boolean(book && book.reader && book.reader.file);
+  }
+
+  function getReadableBooks() {
+    return books.filter(hasReaderText);
+  }
+
+  function readerUrl(book, options) {
+    if (!hasReaderText(book)) {
+      return "";
+    }
+
+    return "reader.html?book=" + encodeURIComponent(book.id) + (options && options.start ? "&start=1" : "");
+  }
+
   window.Bookora = Object.assign(window.Bookora || {}, {
     books: books,
     categories: categories,
@@ -430,6 +467,9 @@
     getCollectionsForBook: getCollectionsForBook,
     getRelatedBooks: getRelatedBooks,
     searchBooks: searchBooks,
-    bookUrl: bookUrl
+    bookUrl: bookUrl,
+    hasReaderText: hasReaderText,
+    getReadableBooks: getReadableBooks,
+    readerUrl: readerUrl
   });
 })();
