@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>The Chemical History of a Candle by Michael Faraday — Bookora open edition</title>
+  <rect width="600" height="900" fill="#D9B48F"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#263E32" stroke-width="1.1" opacity=".8"/>
+  <rect x="34" y="34" width="532" height="832" fill="none" stroke="#8F4632" stroke-width=".55" opacity=".4"/>
+
+  <text x="300" y="88" text-anchor="middle" fill="#263E32" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="600" letter-spacing="4.6">MICHAEL FARADAY</text>
+  <line x1="254" y1="110" x2="346" y2="110" stroke="#8F4632" stroke-width=".8" opacity=".7"/>
+
+  <g transform="translate(300 248)" fill="none">
+    <circle cx="0" cy="-20" r="116" stroke="#263E32" stroke-width=".45" opacity=".18"/>
+    <circle cx="0" cy="-20" r="90" stroke="#263E32" stroke-width=".4" opacity=".12"/>
+    <path d="M-190 112h380" stroke="#263E32" stroke-width=".9" opacity=".55"/>
+    <path d="M-28 112V38h56v74" fill="#263E32" fill-opacity=".08" stroke="#263E32" stroke-width="1.2"/>
+    <path d="M-15 38V24h30v14" stroke="#263E32" stroke-width=".9"/>
+    <path d="M0 24v-8" stroke="#8F4632" stroke-width="1.4"/>
+    <path d="M0 16c-16-10-18-30-5-42 5-5 7-12 5-19 20 13 28 35 16 50-4 5-9 9-16 11Z" fill="#8F4632" fill-opacity=".82" stroke="#8F4632" stroke-width=".7"/>
+    <path d="M0 8c-7-6-8-15-2-22 3-4 3-8 2-12 10 8 13 20 7 28-2 3-4 5-7 6Z" fill="#F1E7D2" fill-opacity=".7" stroke="none"/>
+    <path d="M-92 76c-24-22-38-50-38-82M92 76c24-22 38-50 38-82" stroke="#263E32" stroke-width=".45" opacity=".28"/>
+    <path d="M-138 94c-32-30-49-66-49-108M138 94c32-30 49-66 49-108" stroke="#263E32" stroke-width=".35" opacity=".18"/>
+    <circle cx="-120" cy="72" r="2" fill="#263E32" stroke="none" opacity=".5"/>
+    <circle cx="121" cy="64" r="1.6" fill="#263E32" stroke="none" opacity=".42"/>
+  </g>
+
+  <text x="300" y="424" text-anchor="middle" fill="#8F4632" font-family="Georgia, 'Times New Roman', serif" font-size="31" font-style="italic">The</text>
+  <text x="300" y="494" text-anchor="middle" fill="#263E32" font-family="Georgia, 'Times New Roman', serif" font-size="73" font-weight="bold" letter-spacing="1">CHEMICAL</text>
+  <text x="300" y="565" text-anchor="middle" fill="#263E32" font-family="Georgia, 'Times New Roman', serif" font-size="73" font-weight="bold" letter-spacing="1">HISTORY</text>
+  <text x="300" y="637" text-anchor="middle" fill="#8F4632" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-style="italic">of a candle</text>
+
+  <path d="M238 675h124" stroke="#8F4632" stroke-width=".8" opacity=".65"/>
+  <circle cx="300" cy="675" r="2.5" fill="#8F4632"/>
+
+  <text x="300" y="713" text-anchor="middle" fill="#263E32" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.2">SIX LECTURES · 1861</text>
+  <text x="300" y="790" text-anchor="middle" fill="#263E32" opacity=".7" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.8">A LESSON IN OBSERVATION</text>
+  <text x="300" y="841" text-anchor="middle" fill="#263E32" opacity=".55" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8">BOOKORA · OPEN EDITION</text>
+</svg>

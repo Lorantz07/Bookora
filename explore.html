@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Browse the Bookora catalogue by subject, language, and collection. The full catalogue is in preparation; the reading room and sample shelf are available now.">
+  <meta name="description" content="Browse the Bookora catalogue of public-domain editions. Search by title, author, or translator, then filter by subject, language, or curated reading path.">
   <meta name="theme-color" content="#F5F2EA">
   <title>Explore — Bookora</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/literata-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/catalogue.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -23,6 +24,17 @@
       <circle cx="11" cy="11" r="8"/>
       <path d="m21 21-4.3-4.3"/>
     </symbol>
+    <symbol id="icon-filter" viewBox="0 0 24 24">
+      <line x1="21" x2="14" y1="4" y2="4"/>
+      <line x1="10" x2="3" y1="4" y2="4"/>
+      <line x1="21" x2="12" y1="12" y2="12"/>
+      <line x1="8" x2="3" y1="12" y2="12"/>
+      <line x1="21" x2="16" y1="20" y2="20"/>
+      <line x1="12" x2="3" y1="20" y2="20"/>
+      <line x1="14" x2="14" y1="2" y2="6"/>
+      <line x1="8" x2="8" y1="10" y2="14"/>
+      <line x1="16" x2="16" y1="18" y2="22"/>
+    </symbol>
     <symbol id="icon-menu" viewBox="0 0 24 24">
       <line x1="4" x2="20" y1="12" y2="12"/>
       <line x1="4" x2="20" y1="6" y2="6"/>
@@ -31,6 +43,16 @@
     <symbol id="icon-close" viewBox="0 0 24 24">
       <path d="M18 6 6 18"/>
       <path d="m6 6 12 12"/>
+    </symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+      <path d="m6 9 6 6 6-6"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="M20 6 9 17l-5-5"/>
+    </symbol>
+    <symbol id="icon-rotate-ccw" viewBox="0 0 24 24">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+      <path d="M3 3v5h5"/>
     </symbol>
     <symbol id="icon-arrow-right" viewBox="0 0 24 24">
       <path d="M5 12h14"/>
@@ -85,11 +107,11 @@
         </button>
       </div>
       <h2 id="search-dialog-title">Search the library.</h2>
-      <p class="search-dialog__intro">Look for a title or an author. Bookora will bring together every edition in the catalogue.</p>
+      <p class="search-dialog__intro">Look for a title, an author, or a translator. Bookora will bring together every matching edition in the catalogue.</p>
       <form class="search-form search-dialog__form" action="explore.html" method="get" role="search">
-        <label class="sr-only" for="dialog-search-input">Search by title or author</label>
+        <label class="sr-only" for="dialog-search-input">Search by title, author, or translator</label>
         <svg class="icon search-form__icon" aria-hidden="true"><use href="#icon-search"></use></svg>
-        <input class="search-form__input" id="dialog-search-input" type="search" name="q" placeholder="Search by title or author" autocomplete="off" spellcheck="false">
+        <input class="search-form__input" id="dialog-search-input" type="search" name="q" placeholder="Search by title, author, or translator" autocomplete="off" spellcheck="false">
         <button class="button button--primary" type="submit">
           Search
           <svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
@@ -144,36 +166,108 @@
     </div>
   </dialog>
 
-  <main id="main-content" class="placeholder-main">
-    <div class="container placeholder-grid">
-      <div class="placeholder-copy">
-        <p class="eyebrow">The catalogue / 02</p>
-        <h1>The whole shelf, <em>opening soon.</em></h1>
-        <p>Bookora's catalogue will gather every edition in one place, with ways to browse by subject, language, and reading length. For now, the reading room holds a featured shelf and three curated collections.</p>
-        <div class="placeholder-actions">
-          <a class="button button--primary" href="index.html">
-            Return to the reading room
-            <svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
-          </a>
-          <a class="text-link" href="index.html#featured">See the featured shelf</a>
+  <main id="main-content">
+    <section class="catalogue-hero" aria-labelledby="catalogue-title">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">/</span>
+          <span aria-current="page">Explore</span>
+        </nav>
+
+        <div class="catalogue-hero__grid">
+          <div class="catalogue-hero__copy">
+            <p class="eyebrow">The catalogue / 02</p>
+            <h1 id="catalogue-title">The whole shelf, <em>open to you.</em></h1>
+            <p class="catalogue-hero__lede">Search by title, author, or translator. Then follow a subject, a language, or a curated reading path. No rankings and no popularity scores — only the editions and the context around them.</p>
+          </div>
+
+          <div class="catalogue-hero__search">
+            <form class="catalogue-search" action="explore.html" method="get" role="search" data-catalogue-search>
+              <label class="catalogue-search__label" for="catalogue-search-input">Search the catalogue</label>
+              <div class="search-form">
+                <svg class="icon search-form__icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+                <input class="search-form__input" id="catalogue-search-input" type="search" name="q" placeholder="Title, author, or translator" autocomplete="off" spellcheck="false">
+                <button class="button button--primary" type="submit">
+                  Search
+                  <svg class="icon icon--forward" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+                </button>
+              </div>
+              <div data-search-filter-inputs></div>
+              <p class="catalogue-search__hint">Search titles, authors, and translators. Filters stay active when you search again.</p>
+            </form>
+          </div>
+        </div>
+
+        <dl class="catalogue-facts" aria-label="Catalogue at a glance">
+          <div>
+            <dt>Editions</dt>
+            <dd data-fact-editions>14</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd data-fact-languages>3</dd>
+          </div>
+          <div>
+            <dt>Reading paths</dt>
+            <dd data-fact-collections>3</dd>
+          </div>
+          <div>
+            <dt>Subjects</dt>
+            <dd data-fact-categories>8</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="catalogue-section" aria-labelledby="catalogue-results-title">
+      <div class="container catalogue-layout">
+        <aside class="catalogue-rail" aria-label="Filter the catalogue">
+          <details class="catalogue-filter" data-filter-disclosure open>
+            <summary class="catalogue-filter__summary">
+              <span class="catalogue-filter__summary-label">
+                <svg class="icon" aria-hidden="true"><use href="#icon-filter"></use></svg>
+                Filters
+              </span>
+              <span class="catalogue-filter__badge" data-active-count hidden></span>
+              <svg class="icon catalogue-filter__chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </summary>
+            <div class="catalogue-filter__body">
+              <div class="catalogue-filter__head">
+                <p class="eyebrow">Filter the catalogue</p>
+                <a class="catalogue-filter__reset" href="explore.html" data-clear-all hidden>Reset</a>
+              </div>
+              <div data-filter-rail></div>
+            </div>
+          </details>
+        </aside>
+
+        <div class="catalogue-results">
+          <h2 class="sr-only" id="catalogue-results-title">Catalogue results</h2>
+
+          <div class="catalogue-notice" data-filter-notice role="status" hidden></div>
+
+          <div class="catalogue-toolbar">
+            <p class="catalogue-count" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" data-result-count>14 editions</p>
+            <a class="catalogue-toolbar__clear" href="explore.html" data-clear-all hidden>
+              <svg class="icon" aria-hidden="true"><use href="#icon-rotate-ccw"></use></svg>
+              Clear all
+            </a>
+          </div>
+
+          <div class="catalogue-active" data-active-filters role="group" aria-label="Active filters" hidden></div>
+          <div data-collection-note></div>
+
+          <noscript>
+            <p class="catalogue-noscript">Enable JavaScript to browse, search, and filter the catalogue. This stage renders its editions in the browser.</p>
+          </noscript>
+
+          <ol class="catalogue-list" data-book-list></ol>
+
+          <div class="catalogue-empty" data-empty hidden></div>
         </div>
       </div>
-
-      <aside class="placeholder-card placeholder-card--sage" aria-label="The catalogue">
-        <div class="placeholder-card__top">
-          <span>The catalogue</span>
-          <span>In preparation</span>
-        </div>
-        <h2>A searchable index, built to be read.</h2>
-        <p>Search by title or author, then narrow by category. No rankings, no popularity counters — only the books and the context around them.</p>
-        <div class="placeholder-card__rule"></div>
-        <div class="placeholder-card__foot">
-          <span>Bookora</span>
-          <span>Explore / In preparation</span>
-        </div>
-      </aside>
-    </div>
-    
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -196,7 +290,7 @@
             </span>
             <span class="footer-brand__wordmark">Bookora</span>
           </a>
-          <p class="footer-about">A quiet digital reading room for public-domain books in English, Indonesian, and Malay. Discover, read, and return to your page — all in the browser.</p>
+          <p class="footer-about">A quiet digital reading room for public-domain books in English, Indonesian, and Malay. The catalogue is open; the reading room follows in Stage 3.</p>
           <p class="footer-privacy">No accounts. No reading profiles. Your reading preferences will stay on your device.</p>
         </div>
 
@@ -241,8 +335,8 @@
         <div class="footer-column">
           <h3>Contact</h3>
           <p class="footer-contact">
-            Bookora is in its first stage.<br>
-            No public contact channel yet.
+            Bookora is in its second stage.<br>
+            The reading room is still in preparation.
           </p>
           <ul>
             <li><a href="about.html#privacy">Privacy</a></li>
@@ -262,6 +356,8 @@
     </div>
   </footer>
 
+  <script src="js/books.js" defer></script>
   <script src="js/app.js" defer></script>
+  <script src="js/explore.js" defer></script>
 </body>
 </html>

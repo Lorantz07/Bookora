@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <title>On the Origin of Species by Charles Darwin — Bookora open edition</title>
+  <rect width="600" height="900" fill="#243D32"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#C9B184" stroke-width="1.1" opacity=".72"/>
+  <rect x="34" y="34" width="532" height="832" fill="none" stroke="#F1E7D2" stroke-width=".5" opacity=".16"/>
+
+  <text x="300" y="88" text-anchor="middle" fill="#D8C397" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="600" letter-spacing="4.6">CHARLES DARWIN</text>
+  <line x1="252" y1="110" x2="348" y2="110" stroke="#C9B184" stroke-width=".7" opacity=".65"/>
+
+  <g fill="none" stroke="#C9B184">
+    <circle cx="300" cy="238" r="112" stroke-width=".45" opacity=".2"/>
+    <circle cx="300" cy="238" r="88" stroke-width=".45" opacity=".14"/>
+    <path d="M300 344V190" stroke-width="1.2" opacity=".85"/>
+    <path d="M300 306 244 258M300 306l58-52M300 264 260 226M300 264l42-40M300 224l-30-34M300 224l34-32" stroke-width=".8" opacity=".7"/>
+    <path d="M244 258c-18-4-30-16-34-32M358 254c18-2 31-13 37-27M260 226c-14-4-24-13-28-25M342 224c14-3 24-11 29-22M270 190c-11-4-18-12-21-21M334 192c11-3 18-10 22-19" stroke-width=".6" opacity=".48"/>
+    <path d="M300 344c-28 8-52 22-68 40M300 344c29 8 52 22 68 40" stroke-width=".6" opacity=".38"/>
+    <circle cx="244" cy="258" r="2.2" fill="#C9B184" stroke="none" opacity=".8"/>
+    <circle cx="358" cy="254" r="2.2" fill="#C9B184" stroke="none" opacity=".8"/>
+    <circle cx="260" cy="226" r="1.8" fill="#C9B184" stroke="none" opacity=".65"/>
+    <circle cx="342" cy="224" r="1.8" fill="#C9B184" stroke="none" opacity=".65"/>
+    <circle cx="270" cy="190" r="1.5" fill="#C9B184" stroke="none" opacity=".55"/>
+    <circle cx="334" cy="192" r="1.5" fill="#C9B184" stroke="none" opacity=".55"/>
+    <path d="M178 350h244" stroke-width=".6" opacity=".28"/>
+  </g>
+
+  <text x="300" y="452" text-anchor="middle" fill="#C9B184" font-family="Georgia, 'Times New Roman', serif" font-size="32" font-style="italic">On the</text>
+  <text x="300" y="545" text-anchor="middle" fill="#F1E7D2" font-family="Georgia, 'Times New Roman', serif" font-size="106" font-weight="bold" letter-spacing="-1">Origin</text>
+  <text x="300" y="626" text-anchor="middle" fill="#F1E7D2" font-family="Georgia, 'Times New Roman', serif" font-size="61" letter-spacing="2">of Species</text>
+
+  <path d="M236 662h128" stroke="#C9B184" stroke-width=".7" opacity=".65"/>
+  <circle cx="300" cy="662" r="2.6" fill="#C9B184"/>
+
+  <text x="300" y="704" text-anchor="middle" fill="#D8C397" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.2">BY MEANS OF NATURAL SELECTION</text>
+  <text x="300" y="790" text-anchor="middle" fill="#D8C397" opacity=".7" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.8">1859 · FIRST EDITION</text>
+  <text x="300" y="841" text-anchor="middle" fill="#E6DDC7" opacity=".5" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8">BOOKORA · OPEN EDITION</text>
+</svg>
