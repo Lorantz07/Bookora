@@ -19,7 +19,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/64317",
       license: "Public domain in the United States",
-      description: "A mysterious millionaire, a green light across the bay, and a summer that refuses to stay in the past."
+      description: "A mysterious millionaire, a green light across the bay, and a summer that refuses to stay in the past.",
+      reader: {
+        file: "assets/texts/great-gatsby.json",
+        wordCount: 48196,
+        chapters: 1,
+        unit: "chapter",
+        edition: "Project Gutenberg eBook #64317"
+      }
     },
     {
       id: "habis-gelap",
@@ -66,7 +73,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/1661",
       license: "Public domain",
-      description: "Twelve cases, one unmistakable mind, and the fog-bound streets of Victorian London."
+      description: "Twelve cases, one unmistakable mind, and the fog-bound streets of Victorian London.",
+      reader: {
+        file: "assets/texts/sherlock-holmes.json",
+        wordCount: 104506,
+        chapters: 1,
+        unit: "story",
+        edition: "Project Gutenberg eBook #1661"
+      }
     },
     {
       id: "pride-prejudice",
@@ -93,7 +107,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/35619",
       license: "Public domain",
-      description: "A practical account of the child as an active learner, written from close observation of the classroom."
+      description: "A practical account of the child as an active learner, written from close observation of the classroom.",
+      reader: {
+        file: "assets/texts/montessori-method.json",
+        wordCount: 66089,
+        chapters: 1,
+        unit: "chapter",
+        edition: "Project Gutenberg eBook #35619"
+      }
     },
     {
       id: "meditations",

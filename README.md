@@ -1,27 +1,30 @@
 # Bookora
 
-A quiet digital reading room for public-domain books. Bookora is an editorial, browser-only catalogue built with HTML5, CSS3, and vanilla JavaScript. Stage 3 opens the catalogue and adds a measured in-browser reader for three complete public-domain texts. No frameworks, build step, backend, accounts, or runtime APIs are used.
+A quiet digital reading room for public-domain books. Bookora is an editorial, browser-only catalogue built with HTML5, CSS3, and vanilla JavaScript. Stage 4 expands the measured in-browser reader with three more complete public-domain texts. No frameworks, build step, backend, accounts, or runtime APIs are used.
 
-## Stage 3 status
+## Stage 4 status
 
 Implemented:
 
 - **Live in-browser reader** at `reader.html?book=id`, linked from edition pages and the Home reading preview.
-- **Three complete bundled texts:**
+- **Six complete bundled texts:**
   - *Alice's Adventures in Wonderland* — Lewis Carroll — 12 chapters, 26,268 words.
   - *The Yellow Wallpaper* — Charlotte Perkins Gilman — one short story, 6,078 words.
   - *The Time Machine* — H. G. Wells — 17 sections (including the Epilogue), 32,310 words.
+  - *The Great Gatsby* — F. Scott Fitzgerald — 48,196 words.
+  - *The Adventures of Sherlock Holmes* — Arthur Conan Doyle — 104,506 words.
+  - *The Montessori Method* — Maria Montessori — 66,089 words.
 - **Measured two-page spread** on viewports ≥900 ×700 px; a single page below that. Pages are measured from the actual visible page box after fonts load, so chapters start on new pages and type changes repaginate without losing your place.
 - **Chapter navigation:** Contents dialog with chapter jumps, page numbers, current-chapter highlighting, and a remembered reading place.
 - **Controls:** Keyboard arrows/space, page turns, tap and swipe, Contents, Display settings, Home/End.
 - **Display settings:** type size and line height only, stored in `localStorage` with no account.
 - **Progress:** Your place is restored on revisit, stored per book in `localStorage`; `?start=1` opens a book at its beginning.
-- **Catalogue cards:** Edition pages for the three reader books show live reader status (Available, In progress, Finished) with percentage and progress, plus links into the reader.
+- **Catalogue cards:** Edition pages for the six reader books show live reader status (Available, In progress, Finished) with percentage and progress, plus links into the reader.
 - **Responsive reader chrome** from 320 px to 1440 px with no horizontal overflow.
 
-Not part of Stage 3:
+Not part of Stage 4:
 
-- The other eleven catalogue editions do not have reader texts yet; they remain catalogue-only with their source and rights records.
+- The other eight catalogue editions do not have reader texts yet; they remain catalogue-only with their source and rights records.
 - Accounts, a backend, a database, runtime APIs, or a live contact channel.
 - Printed or PDF export.
 
@@ -63,6 +66,9 @@ Supported book IDs in the reader:
 alice-wonderland
 yellow-wallpaper
 time-machine
+great-gatsby
+sherlock-holmes
+montessori-method
 ```
 
 Edition URLs use the catalogue IDs. Reader URLs use the same IDs:
@@ -71,6 +77,9 @@ Edition URLs use the catalogue IDs. Reader URLs use the same IDs:
 reader.html?book=alice-wonderland
 reader.html?book=yellow-wallpaper
 reader.html?book=time-machine
+reader.html?book=great-gatsby
+reader.html?book=sherlock-holmes
+reader.html?book=montessori-method
 ```
 
 `?start=1` opens a book from its first page. `Bookora.hasReaderText(book)`, `Bookora.getReadableBooks()`, and `Bookora.readerUrl(book)` expose the reader metadata to the catalogue pages.
@@ -95,7 +104,7 @@ Bookora/
 ├── explore.html            Catalogue, search, filters, and results
 ├── about.html              About, sources, privacy, copyright
 ├── book-detail.html        Dynamic edition page
-├── reader.html             Stage 3 reader shell
+├── reader.html             Stage 4 reader shell
 ├── favicon.svg
 ├── css/
 │   ├── style.css           Tokens, reset, header, search, dialogs, footer
@@ -114,7 +123,10 @@ Bookora/
 │   ├── texts/              Bundled public-domain reader texts
 │   │   ├── alice-wonderland.json
 │   │   ├── the-time-machine.json
-│   │   └── the-yellow-wallpaper.json
+│   │   ├── the-yellow-wallpaper.json
+│   │   ├── great-gatsby.json
+│   │   ├── sherlock-holmes.json
+│   │   └── montessori-method.json
 │   ├── fonts/              Self-hosted Literata and DM Sans WOFF2 files
 │   └── images/
 │       ├── covers/         Fourteen original SVG book covers

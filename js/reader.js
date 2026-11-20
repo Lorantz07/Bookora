@@ -273,7 +273,7 @@
       eyebrow: "The reading room / Not yet",
       title: "This edition is <em>not in the reader yet.</em>",
       copy: [
-        "Bookora currently opens three complete texts in the reader. " +
+        "Bookora currently opens " + catalogue.getReadableBooks().length + " complete texts in the reader. " +
           escapeHTML(book.title) +
           " remains in the catalogue with its edition notes, source link, and rights record.",
         "The edition page is the best place to read about this copy and follow its source."
