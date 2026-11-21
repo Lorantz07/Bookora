@@ -1181,7 +1181,9 @@
 
       els.loadingNote.textContent = "Measuring the pages — this can take a moment.";
       pages = await paginateText(function (done, total) {
-        els.loadingNote.textContent = "Measuring the pages · " + done + " of " + total + " chapters.";
+        const unit = (book.reader && book.reader.unit) || "chapter";
+        const units = unit === "story" ? "stories" : unit + "s";
+        els.loadingNote.textContent = "Measuring the pages · " + done + " of " + total + " " + units + ".";
       });
 
       if (!pages.length) {

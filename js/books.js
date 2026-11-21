@@ -22,8 +22,8 @@
       description: "A mysterious millionaire, a green light across the bay, and a summer that refuses to stay in the past.",
       reader: {
         file: "assets/texts/great-gatsby.json",
-        wordCount: 48196,
-        chapters: 1,
+        wordCount: 48118,
+        chapters: 9,
         unit: "chapter",
         edition: "Project Gutenberg eBook #64317"
       }
@@ -76,8 +76,8 @@
       description: "Twelve cases, one unmistakable mind, and the fog-bound streets of Victorian London.",
       reader: {
         file: "assets/texts/sherlock-holmes.json",
-        wordCount: 104506,
-        chapters: 1,
+        wordCount: 104346,
+        chapters: 12,
         unit: "story",
         edition: "Project Gutenberg eBook #1661"
       }
@@ -93,7 +93,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/1342",
       license: "Public domain",
-      description: "Wit, pride, and the slow education of two very stubborn hearts."
+      description: "Wit, pride, and the slow education of two very stubborn hearts.",
+      reader: {
+        file: "assets/texts/pride-prejudice.json",
+        wordCount: 121571,
+        chapters: 61,
+        unit: "chapter",
+        edition: "Project Gutenberg eBook #1342"
+      }
     },
     {
       id: "montessori-method",
@@ -105,15 +112,15 @@
       published: "1912 translation",
       cover: "assets/images/covers/montessori-method.svg",
       source: "Project Gutenberg",
-      sourceUrl: "https://www.gutenberg.org/ebooks/35619",
+      sourceUrl: "https://www.gutenberg.org/ebooks/39863",
       license: "Public domain",
       description: "A practical account of the child as an active learner, written from close observation of the classroom.",
       reader: {
         file: "assets/texts/montessori-method.json",
-        wordCount: 66089,
-        chapters: 1,
-        unit: "chapter",
-        edition: "Project Gutenberg eBook #35619"
+        wordCount: 115126,
+        chapters: 23,
+        unit: "section",
+        edition: "Project Gutenberg eBook #39863"
       }
     },
     {
@@ -128,7 +135,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/2680",
       license: "Public domain",
-      description: "Private notes on duty, mortality, and the quiet work of remaining steady."
+      description: "Private notes on duty, mortality, and the quiet work of remaining steady.",
+      reader: {
+        file: "assets/texts/meditations.json",
+        wordCount: 57307,
+        chapters: 12,
+        unit: "book",
+        edition: "Project Gutenberg eBook #2680"
+      }
     },
     {
       id: "art-of-war",
@@ -142,7 +156,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/132",
       license: "Public domain",
-      description: "A compact classic on strategy, restraint, and knowing the ground beneath your feet."
+      description: "A compact classic on strategy, restraint, and knowing the ground beneath your feet.",
+      reader: {
+        file: "assets/texts/art-of-war.json",
+        wordCount: 53069,
+        chapters: 14,
+        unit: "section",
+        edition: "Project Gutenberg eBook #132"
+      }
     },
     {
       id: "origin-species",
