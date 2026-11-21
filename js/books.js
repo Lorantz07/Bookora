@@ -176,7 +176,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/1228",
       license: "Public domain",
-      description: "Darwin's argument for natural selection, built from patient observation and written for the general reader."
+      description: "Darwin's argument for natural selection, built from patient observation and written for the general reader.",
+      reader: {
+        file: "assets/texts/origin-species.json",
+        wordCount: 148760,
+        chapters: 15,
+        unit: "section",
+        edition: "Project Gutenberg eBook #1228 · First edition (1859)"
+      }
     },
     {
       id: "yellow-wallpaper",
@@ -222,6 +229,7 @@
       id: "chemical-history-candle",
       title: "The Chemical History of a Candle",
       author: "Michael Faraday",
+      contributor: "Edited by William Crookes",
       language: "English",
       category: "Science",
       published: "1861",
@@ -229,7 +237,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/14474",
       license: "Public domain",
-      description: "Six lectures that turn a burning candle into a lesson on combustion, air, and the habits of careful observation."
+      description: "Six lectures that turn a burning candle into a lesson on combustion, air, and the habits of careful observation.",
+      reader: {
+        file: "assets/texts/chemical-history-candle.json",
+        wordCount: 40126,
+        chapters: 8,
+        unit: "section",
+        edition: "Project Gutenberg eBook #14474 · 1908 impression"
+      }
     },
     {
       id: "education-henry-adams",
@@ -242,7 +257,14 @@
       source: "Project Gutenberg",
       sourceUrl: "https://www.gutenberg.org/ebooks/2044",
       license: "Public domain",
-      description: "An autobiography that treats education as a lifelong, unsettled question rather than a finished curriculum."
+      description: "An autobiography that treats education as a lifelong, unsettled question rather than a finished curriculum.",
+      reader: {
+        file: "assets/texts/education-henry-adams.json",
+        wordCount: 175606,
+        chapters: 37,
+        unit: "section",
+        edition: "Project Gutenberg eBook #2044 · 1918 edition"
+      }
     },
     {
       id: "sejarah-melayu",
