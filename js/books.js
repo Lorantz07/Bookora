@@ -22,6 +22,7 @@
       description: "A mysterious millionaire, a green light across the bay, and a summer that refuses to stay in the past.",
       reader: {
         file: "assets/texts/great-gatsby.json",
+        opening: "assets/texts/openings/great-gatsby.json",
         wordCount: 48118,
         chapters: 9,
         unit: "chapter",
@@ -56,6 +57,7 @@
       description: "A restless afternoon, a waistcoat-wearing rabbit, and a world where nothing behaves as it should.",
       reader: {
         file: "assets/texts/alice-wonderland.json",
+        opening: "assets/texts/openings/alice-wonderland.json",
         wordCount: 26268,
         chapters: 12,
         unit: "chapter",
@@ -76,6 +78,7 @@
       description: "Twelve cases, one unmistakable mind, and the fog-bound streets of Victorian London.",
       reader: {
         file: "assets/texts/sherlock-holmes.json",
+        opening: "assets/texts/openings/sherlock-holmes.json",
         wordCount: 104346,
         chapters: 12,
         unit: "story",
@@ -96,6 +99,7 @@
       description: "Wit, pride, and the slow education of two very stubborn hearts.",
       reader: {
         file: "assets/texts/pride-prejudice.json",
+        opening: "assets/texts/openings/pride-prejudice.json",
         wordCount: 121571,
         chapters: 61,
         unit: "chapter",
@@ -117,6 +121,7 @@
       description: "A practical account of the child as an active learner, written from close observation of the classroom.",
       reader: {
         file: "assets/texts/montessori-method.json",
+        opening: "assets/texts/openings/montessori-method.json",
         wordCount: 115126,
         chapters: 23,
         unit: "section",
@@ -138,6 +143,7 @@
       description: "Private notes on duty, mortality, and the quiet work of remaining steady.",
       reader: {
         file: "assets/texts/meditations.json",
+        opening: "assets/texts/openings/meditations.json",
         wordCount: 57307,
         chapters: 12,
         unit: "book",
@@ -159,6 +165,7 @@
       description: "A compact classic on strategy, restraint, and knowing the ground beneath your feet.",
       reader: {
         file: "assets/texts/art-of-war.json",
+        opening: "assets/texts/openings/art-of-war.json",
         wordCount: 53069,
         chapters: 14,
         unit: "section",
@@ -179,6 +186,7 @@
       description: "Darwin's argument for natural selection, built from patient observation and written for the general reader.",
       reader: {
         file: "assets/texts/origin-species.json",
+        opening: "assets/texts/openings/origin-species.json",
         wordCount: 148760,
         chapters: 15,
         unit: "section",
@@ -199,6 +207,7 @@
       description: "A woman, a room, and a pattern that will not sit still. A landmark of short fiction.",
       reader: {
         file: "assets/texts/the-yellow-wallpaper.json",
+        opening: "assets/texts/openings/the-yellow-wallpaper.json",
         wordCount: 6078,
         chapters: 1,
         unit: "story",
@@ -219,6 +228,7 @@
       description: "A Victorian inventor travels to the year 802,701 and finds a future stranger than any machine.",
       reader: {
         file: "assets/texts/the-time-machine.json",
+        opening: "assets/texts/openings/the-time-machine.json",
         wordCount: 32310,
         chapters: 17,
         unit: "section",
@@ -240,6 +250,7 @@
       description: "Six lectures that turn a burning candle into a lesson on combustion, air, and the habits of careful observation.",
       reader: {
         file: "assets/texts/chemical-history-candle.json",
+        opening: "assets/texts/openings/chemical-history-candle.json",
         wordCount: 40126,
         chapters: 8,
         unit: "section",
@@ -260,6 +271,7 @@
       description: "An autobiography that treats education as a lifelong, unsettled question rather than a finished curriculum.",
       reader: {
         file: "assets/texts/education-henry-adams.json",
+        opening: "assets/texts/openings/education-henry-adams.json",
         wordCount: 175606,
         chapters: 37,
         unit: "section",

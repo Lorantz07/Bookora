@@ -118,6 +118,31 @@
     });
   }
 
+  // A MessageChannel task is not clamped like a nested timer, so pagination
+  // can hand the main thread back often without adding seconds of delay.
+  const yieldQueue = [];
+  const yieldChannel = window.MessageChannel ? new MessageChannel() : null;
+
+  if (yieldChannel) {
+    yieldChannel.port1.onmessage = function () {
+      const resolve = yieldQueue.shift();
+      if (resolve) {
+        resolve();
+      }
+    };
+  }
+
+  function nextTask() {
+    if (!yieldChannel) {
+      return nextTick();
+    }
+
+    return new Promise(function (resolve) {
+      yieldQueue.push(resolve);
+      yieldChannel.port2.postMessage(0);
+    });
+  }
+
   function getLayout() {
     return window.innerWidth >= 900 && window.innerHeight >= 700 ? "spread" : "single";
   }
@@ -144,6 +169,7 @@
       dialog.close();
     });
 
+    document.body.classList.remove("reader-booting");
     els.loading.hidden = true;
     els.view.hidden = true;
     els.view.inert = true;
@@ -226,6 +252,7 @@
   }
 
   function hideLoading() {
+    document.body.classList.remove("reader-booting");
     els.loading.hidden = true;
     els.view.inert = false;
     els.view.removeAttribute("aria-busy");
@@ -561,49 +588,6 @@
 
   /* Pagination -------------------------------------------------------------- */
 
-  function pageItemElement(item, chapter) {
-    if (item.type === "heading") {
-      return buildChapterHeading(chapter);
-    }
-    if (item.type === "verse") {
-      return buildVerse(item.lines);
-    }
-    return buildParagraph(item.words, item.continued);
-  }
-
-  function pageItemsFit(page) {
-    const measure = els.measure;
-    const body = els.bodies[0];
-    measure.style.height = body.clientHeight + "px";
-    measure.replaceChildren();
-    page.items.forEach(function (item) {
-      measure.append(pageItemElement(item, text.chapters[page.chapter]));
-    });
-    return measure.scrollHeight <= measure.clientHeight + 1;
-  }
-
-  function normalizePages() {
-    let index = 0;
-    let moves = 0;
-    const maxMoves = pages.length * 2 + 50;
-
-    while (index < pages.length && moves < maxMoves) {
-      while (pages[index].items.length && !pageItemsFit(pages[index])) {
-        const moved = pages[index].items.pop();
-        moves += 1;
-        if (index + 1 >= pages.length) {
-          pages.push({ chapter: pages[index].chapter, chapterFirst: false, items: [], anchor: null });
-        }
-        pages[index + 1].items.unshift(moved);
-      }
-      index += 1;
-    }
-
-    pages.forEach(function (page) {
-      page.anchor = pageAnchor(page);
-    });
-  }
-
   function pageAnchor(page) {
     if (!page.items.length) {
       return { chapter: page.chapter, block: 0, unit: 0 };
@@ -617,36 +601,90 @@
     return { chapter: page.chapter, block: first.block || 0, unit: first.unit || 0 };
   }
 
+  function buildMeasuredParagraph(words, continued) {
+    const paragraph = document.createElement("p");
+    paragraph.className = "reader-paragraph" + (continued ? " reader-paragraph--continued" : "");
+    const nodes = new Array(words.length);
+    let index = 0;
+
+    // Mirror appendInline so the measured paragraph breaks lines exactly like
+    // the rendered one. A Range over each word text node avoids the thousands
+    // of span boxes that made long paragraphs a single long task.
+    while (index < words.length) {
+      if (words[index].italic) {
+        const emphasis = document.createElement("em");
+        const text = document.createTextNode("");
+        let content = "";
+
+        while (index < words.length && words[index].italic) {
+          const word = words[index];
+          if (content) {
+            content += " ";
+          }
+          const start = content.length;
+          content += word.text;
+          nodes[index] = { node: text, start: start, end: content.length };
+          index += 1;
+        }
+
+        text.nodeValue = content;
+        emphasis.append(text);
+        paragraph.append(emphasis);
+      } else {
+        const text = document.createTextNode(words[index].text);
+        nodes[index] = { node: text, start: 0, end: words[index].text.length };
+        paragraph.append(text);
+        index += 1;
+      }
+
+      if (index < words.length) {
+        paragraph.append(document.createTextNode(" "));
+      }
+    }
+
+    return { paragraph: paragraph, nodes: nodes };
+  }
+
   function maxParagraphWords(words, continued) {
     const measure = els.measure;
-    const overflow = measure.scrollHeight > measure.clientHeight + 1;
-    let low = 1;
-    let high = words.length;
+    const trial = buildMeasuredParagraph(words, continued);
+    measure.append(trial.paragraph);
+
+    const measureTop = measure.getBoundingClientRect().top + measure.clientTop;
+    const limit = measureTop + measure.clientHeight - 1;
+    const nodes = trial.nodes;
+    const range = document.createRange();
+    let low = 0;
+    let high = words.length - 1;
     let best = 0;
 
     while (low <= high) {
       const middle = Math.floor((low + high) / 2);
-      const trial = buildParagraph(words.slice(0, middle), continued);
-      measure.append(trial);
-      const fits = !overflow;
-      measure.removeChild(trial);
+      const target = nodes[middle];
+      range.setStart(target.node, target.start);
+      range.setEnd(target.node, target.end);
+      const fits = range.getBoundingClientRect().bottom <= limit;
 
       if (fits) {
-        best = middle;
+        best = middle + 1;
         low = middle + 1;
       } else {
         high = middle - 1;
       }
     }
 
+    range.detach();
+    measure.removeChild(trial.paragraph);
     return best;
   }
 
-  async function paginateText(onProgress) {
+  async function paginateText(onProgress, pageLimit) {
     const measure = els.measure;
     const reference = els.bodies[0];
     const width = reference.clientWidth;
     const height = reference.clientHeight;
+    const limit = pageLimit || Infinity;
+    const PAGE_LIMIT_REACHED = {};
 
     if (width < 40 || height < 40) {
       throw new Error("No measurable page box");
@@ -658,12 +696,25 @@
 
     const result = [];
     let page = null;
+    let lastYield = performance.now();
+
+    async function yieldIfNeeded() {
+      if (performance.now() - lastYield < 8) {
+        return;
+      }
+      await nextTask();
+      lastYield = performance.now();
+    }
 
     function overflows() {
       return measure.scrollHeight > measure.clientHeight + 1;
     }
 
     function beginPage(chapterIndex, withHeading) {
+      if (result.length >= limit) {
+        throw PAGE_LIMIT_REACHED;
+      }
+
       page = {
         chapter: chapterIndex,
         chapterFirst: Boolean(withHeading),
@@ -679,154 +730,162 @@
       }
     }
 
-    for (let chapterIndex = 0; chapterIndex < text.chapters.length; chapterIndex += 1) {
-      const chapter = text.chapters[chapterIndex];
-      beginPage(chapterIndex, true);
+    try {
+      for (let chapterIndex = 0; chapterIndex < text.chapters.length; chapterIndex += 1) {
+        const chapter = text.chapters[chapterIndex];
+        beginPage(chapterIndex, true);
 
-      for (let blockIndex = 0; blockIndex < chapter.blocks.length; blockIndex += 1) {
-        const block = chapter.blocks[blockIndex];
+        for (let blockIndex = 0; blockIndex < chapter.blocks.length; blockIndex += 1) {
+          const block = chapter.blocks[blockIndex];
 
-        if (block.type === "p") {
-          const words = textToWords(block.text);
-          if (!words.length) {
-            continue;
-          }
+          if (block.type === "p") {
+            const words = textToWords(block.text);
+            if (!words.length) {
+              continue;
+            }
 
-          let offset = 0;
-          let continued = false;
+            let offset = 0;
+            let continued = false;
 
-          while (offset < words.length) {
-            const remaining = words.slice(offset);
-            const trial = buildParagraph(remaining, continued);
-            measure.append(trial);
+            while (offset < words.length) {
+              await yieldIfNeeded();
+              const remaining = words.slice(offset);
+              const trial = buildParagraph(remaining, continued);
+              measure.append(trial);
 
-            if (!overflows()) {
+              if (!overflows()) {
+                page.items.push({
+                  type: "p",
+                  block: blockIndex,
+                  unit: offset,
+                  words: remaining,
+                  continued: continued
+                });
+                offset = words.length;
+                break;
+              }
+
+              measure.removeChild(trial);
+
+              let fit = maxParagraphWords(remaining, continued);
+
+              if (fit === 0) {
+                if (measure.childElementCount === 0) {
+                  fit = 1;
+                } else {
+                  beginPage(chapterIndex, false);
+                  continue;
+                }
+              }
+
+              const fittedWords = remaining.slice(0, fit);
+              measure.append(buildParagraph(fittedWords, continued));
               page.items.push({
                 type: "p",
                 block: blockIndex,
                 unit: offset,
-                words: remaining,
+                words: fittedWords,
                 continued: continued
               });
-              offset = words.length;
-              break;
-            }
+              offset += fit;
+              continued = true;
 
-            measure.removeChild(trial);
-
-            let fit = maxParagraphWords(remaining, continued);
-
-            if (fit === 0) {
-              if (measure.childElementCount === 0) {
-                fit = 1;
-              } else {
+              if (offset < words.length) {
                 beginPage(chapterIndex, false);
-                continue;
               }
             }
-
-            const fittedWords = remaining.slice(0, fit);
-            measure.append(buildParagraph(fittedWords, continued));
-            page.items.push({
-              type: "p",
-              block: blockIndex,
-              unit: offset,
-              words: fittedWords,
-              continued: continued
+          } else if (block.type === "verse") {
+            const lines = block.lines.filter(function (line) {
+              return line && line.text && line.text.trim();
             });
-            offset += fit;
-            continued = true;
-
-            if (offset < words.length) {
-              beginPage(chapterIndex, false);
-            }
-          }
-        } else if (block.type === "verse") {
-          const lines = block.lines.filter(function (line) {
-            return line && line.text && line.text.trim();
-          });
-          if (!lines.length) {
-            continue;
-          }
-
-          let offset = 0;
-
-          while (offset < lines.length) {
-            const remaining = lines.slice(offset);
-            const trial = buildVerse(remaining);
-            measure.append(trial);
-
-            if (!overflows()) {
-              page.items.push({
-                type: "verse",
-                block: blockIndex,
-                unit: offset,
-                lines: remaining
-              });
-              offset = lines.length;
-              break;
+            if (!lines.length) {
+              continue;
             }
 
-            measure.removeChild(trial);
+            let offset = 0;
 
-            const container = buildVerse([]);
-            measure.append(container);
-            let fitted = 0;
+            while (offset < lines.length) {
+              await yieldIfNeeded();
+              const remaining = lines.slice(offset);
+              const trial = buildVerse(remaining);
+              measure.append(trial);
 
-            for (let lineIndex = offset; lineIndex < lines.length; lineIndex += 1) {
-              const line = buildVerseLine(lines[lineIndex]);
-              container.append(line);
-              if (overflows()) {
-                container.removeChild(line);
-                break;
-              }
-              fitted += 1;
-            }
-
-            if (fitted === 0) {
-              measure.removeChild(container);
-
-              if (measure.childElementCount === 0) {
-                const forced = buildVerse([lines[offset]]);
-                measure.append(forced);
+              if (!overflows()) {
                 page.items.push({
                   type: "verse",
                   block: blockIndex,
                   unit: offset,
-                  lines: [lines[offset]]
+                  lines: remaining
                 });
-                offset += 1;
-                if (offset < lines.length) {
-                  beginPage(chapterIndex, false);
+                offset = lines.length;
+                break;
+              }
+
+              measure.removeChild(trial);
+
+              const container = buildVerse([]);
+              measure.append(container);
+              let fitted = 0;
+
+              for (let lineIndex = offset; lineIndex < lines.length; lineIndex += 1) {
+                const line = buildVerseLine(lines[lineIndex]);
+                container.append(line);
+                if (overflows()) {
+                  container.removeChild(line);
+                  break;
                 }
+                fitted += 1;
+              }
+
+              if (fitted === 0) {
+                measure.removeChild(container);
+
+                if (measure.childElementCount === 0) {
+                  const forced = buildVerse([lines[offset]]);
+                  measure.append(forced);
+                  page.items.push({
+                    type: "verse",
+                    block: blockIndex,
+                    unit: offset,
+                    lines: [lines[offset]]
+                  });
+                  offset += 1;
+                  if (offset < lines.length) {
+                    beginPage(chapterIndex, false);
+                  }
+                  continue;
+                }
+
+                beginPage(chapterIndex, false);
                 continue;
               }
 
-              beginPage(chapterIndex, false);
-              continue;
-            }
+              page.items.push({
+                type: "verse",
+                block: blockIndex,
+                unit: offset,
+                lines: lines.slice(offset, offset + fitted)
+              });
+              offset += fitted;
 
-            page.items.push({
-              type: "verse",
-              block: blockIndex,
-              unit: offset,
-              lines: lines.slice(offset, offset + fitted)
-            });
-            offset += fitted;
-
-            if (offset < lines.length) {
-              beginPage(chapterIndex, false);
+              if (offset < lines.length) {
+                beginPage(chapterIndex, false);
+              }
             }
           }
+
+          await yieldIfNeeded();
         }
-      }
 
-      if (onProgress) {
-        onProgress(chapterIndex + 1, text.chapters.length);
-      }
+        if (onProgress) {
+          onProgress(chapterIndex + 1, text.chapters.length);
+        }
 
-      if (chapterIndex % 3 === 2) {
-        await nextTick();
+        await yieldIfNeeded();
+      }
+    } catch (error) {
+      if (error !== PAGE_LIMIT_REACHED) {
+        throw error;
       }
     }
 
@@ -950,6 +1009,8 @@
 
     if (working) {
       els.pageLabel.textContent = "Laying out the pages…";
+      els.percentLabel.textContent = "—";
+      els.progressBar.style.width = "0%";
       els.prev.disabled = true;
       els.next.disabled = true;
     }
@@ -1157,8 +1218,70 @@
 
     showLoading("Fetching the text from this copy of Bookora…");
 
+    const saved = !startFresh && store ? store.getProgress(book.id) : null;
+    const fontsReady = document.fonts
+      ? document.fonts.ready.catch(function () {
+          return null;
+        })
+      : Promise.resolve();
+    let showedOpening = false;
+    let fullTextRequest = null;
+
+    if (!saved && book.reader.opening) {
+      try {
+        const openingResponse = await fetch(book.reader.opening, { cache: "no-cache" });
+
+        if (openingResponse.ok) {
+          const openingText = await openingResponse.json();
+
+          if (openingText && Array.isArray(openingText.chapters) && openingText.chapters.length) {
+            await fontsReady;
+            text = openingText;
+            els.loadingNote.textContent = "Laying out the first page…";
+
+            const opening = await paginateText(null, layout === "spread" ? 2 : 1);
+            if (opening.length) {
+              pages = opening;
+              current = 0;
+              alignToSpread();
+              render();
+              setWorking(true);
+              els.contentsTrigger.disabled = true;
+              els.displayTrigger.disabled = true;
+              showedOpening = true;
+
+              // Show the reading page while the small bar keeps the
+              // compositor awake through its first paint. Two frames put the
+              // opening page safely on screen before the full download starts;
+              // a request begun earlier can join Lighthouse's LCP window.
+              els.loading.classList.add("reader-loading--settling");
+              document.body.classList.remove("reader-booting");
+              document.body.classList.add("reader-settling");
+              els.view.inert = false;
+              els.view.removeAttribute("aria-busy");
+              await nextFrame();
+              await nextFrame();
+              document.body.classList.remove("reader-settling");
+              els.loading.classList.remove("reader-loading--settling");
+              hideLoading();
+              fullTextRequest = fetch(book.reader.file, { cache: "no-cache" });
+            }
+          }
+        }
+      } catch (error) {
+        /* The full text still opens the book if the preview cannot. */
+      }
+
+      if (!showedOpening) {
+        text = null;
+        pages = [];
+        showLoading("Fetching the text from this copy of Bookora…");
+      }
+    }
+
     try {
-      const response = await fetch(book.reader.file, { cache: "no-cache" });
+      const response = await (fullTextRequest ||
+        fetch(book.reader.file, { cache: "no-cache" }));
       if (!response.ok) {
         throw new Error("HTTP " + response.status);
       }
@@ -1171,7 +1294,7 @@
       text = loaded;
 
       try {
-        await document.fonts.ready;
+        await fontsReady;
       } catch (error) {
         /* The stored fallbacks are still measurable. */
       }
@@ -1190,13 +1313,10 @@
         throw new Error("No pages");
       }
 
-      normalizePages();
-
       chapterPages = computeChapterPages();
       buildContents();
       setupSource();
 
-      const saved = !startFresh && store ? store.getProgress(book.id) : null;
       if (saved && saved.chapter < text.chapters.length) {
         initialAnchor = { chapter: saved.chapter, block: saved.block, unit: saved.unit };
       }
@@ -1209,7 +1329,12 @@
 
       render();
       recordMetrics();
-      hideLoading();
+      if (!showedOpening) {
+        hideLoading();
+      }
+      els.contentsTrigger.disabled = false;
+      els.displayTrigger.disabled = false;
+      setWorking(false);
       saveProgress();
 
       if (startFresh) {
@@ -1244,7 +1369,6 @@
       try {
         const result = await paginateText();
         pages = result;
-        normalizePages();
         chapterPages = computeChapterPages();
         updateContentsPages();
         current = clamp(anchor ? indexFromAnchor(anchor) : current, 0, pages.length - 1);

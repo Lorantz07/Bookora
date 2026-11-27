@@ -491,6 +491,17 @@
 
 /* Loading ---------------------------------------------------------------- */
 
+/* Keep the first paint for the reading page itself, never the boot furniture. */
+.reader-booting {
+  background-image: none;
+}
+
+.reader-booting .reader-chrome,
+.reader-booting .reader-view,
+.reader-settling .reader-chrome {
+  visibility: hidden;
+}
+
 .reader-loading {
   position: absolute;
   inset: 0;
@@ -499,9 +510,36 @@
   place-items: center;
   padding: clamp(1.25rem, 5vw, 3rem);
   background-color: var(--paper);
-  background-image: url("../assets/images/paper-grain.svg");
-  background-size: 180px 180px;
   text-align: center;
+}
+
+/* While the opening page settles, the reading page shows through and only
+   the small bar remains, keeping the compositor busy through that paint.
+   Nothing moves in the layout, so the settling state adds no shift. */
+.reader-loading--settling {
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.reader-loading--settling .eyebrow,
+.reader-loading--settling .reader-loading__title,
+.reader-loading--settling .reader-loading__note {
+  animation: none;
+  opacity: 0;
+}
+
+/* The bar gives immediate feedback without becoming a contentful paint. */
+.reader-loading .eyebrow,
+.reader-loading__title,
+.reader-loading__note {
+  opacity: 0;
+  animation: reader-loading-reveal 200ms ease 1500ms forwards;
+}
+
+@keyframes reader-loading-reveal {
+  to {
+    opacity: 1;
+  }
 }
 
 .reader-loading__panel {
@@ -1066,6 +1104,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .reader-loading .eyebrow,
+  .reader-loading__title,
+  .reader-loading__note {
+    animation-duration: 1ms;
+  }
+
   .reader-loading__bar span {
     animation: none;
     width: 100%;

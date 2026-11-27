@@ -1,6 +1,6 @@
 # Bookora
 
-A quiet digital reading room for public-domain books. Bookora is an editorial, browser-only catalogue built with HTML5, CSS3, and vanilla JavaScript. Stage 5a expands the measured in-browser reader with three further public-domain texts. No frameworks, build step, backend, accounts, or runtime APIs are used.
+A quiet digital reading room for public-domain books. Bookora is an editorial, browser-only catalogue built with HTML5, CSS3, and vanilla JavaScript. Stage 5a expands the measured in-browser reader with three further public-domain texts, and the reader now opens its first page before the rest of the book finishes loading. No frameworks, build step, backend, accounts, or runtime APIs are used.
 
 ## Stage 5a status
 
@@ -20,6 +20,7 @@ Implemented:
   - *On the Origin of Species* — Charles Darwin — 15 sections (introduction and 14 chapters), 148,760 words.
   - *The Chemical History of a Candle* — Michael Faraday; edited by William Crookes — 8 sections (preface, six lectures, and lecture on platinum), 40,126 words.
   - *The Education of Henry Adams* — Henry Adams — 37 sections (two prefaces and 35 chapters), 175,606 words.
+- **Progressive opening:** each book paints its first page from a small first-section file (2–75 KB) while the full text downloads and measures in the background. The opening page is readable at once; page turning and the Contents unlock when the complete pagination is ready.
 - **Measured two-page spread** on viewports ≥900 ×700 px; a single page below that. Pages are measured from the actual visible page box after fonts load, so chapters start on new pages and type changes repaginate without losing your place.
 - **Chapter navigation:** Contents dialog with chapter jumps, page numbers, current-chapter highlighting, and a remembered reading place.
 - **Controls:** Keyboard arrows/space, page turns, tap and swipe, Contents, Display settings, Home/End.
@@ -65,6 +66,23 @@ The reader stores:
 - Display preferences at `localStorage["bookora.reader.prefs.v1"]`, with type size index 0–3 and line-height index 0–2.
 
 Texts are bundled as local JSON files and fetched locally on first open. The reader never calls Project Gutenberg, Wikisource, or another network source at runtime.
+
+Each reader book also has a small first-section file in `assets/texts/openings/`. The reader paints that page first, then downloads the full text and measures the remaining pages. Opening files are generated from the bundled texts and are served from the same local directory.
+
+## Reader performance
+
+The reader opens progressively. The opening file contains only the first chapter or section, so the first page does not wait for a large JSON parse or a full pagination pass. After that page is on screen, the full text downloads and the rest of the book is measured. The loading bar stays through the opening paint, and the full request starts only after it, so a large download cannot hold back the first page or join its paint timing.
+
+Pagination measures words with a `Range` over text nodes instead of building a span per word. The measuring loop yields to the browser every 8 ms through a `MessageChannel` task, which avoids the nested-timer clamp and keeps each main-thread task short. Page counts are exact and unchanged from the measured edition.
+
+Mobile Lighthouse (Lighthouse 13.6, default mobile preset with simulated throttling) on all twelve reader URLs, final pass:
+
+- **Performance score:** 99–100 — ten titles at 100 and two at 99. Repeat runs of the two 99s reached 100.
+- **Largest Contentful Paint:** 1.06–1.12 s.
+- **Total Blocking Time:** 0–53 ms.
+- **Cumulative Layout Shift:** 0.
+
+Local timings on the same machine: the first page is visible in under 0.2 s; the complete text is ready in about 0.7 s for *Alice's Adventures in Wonderland*, 1.7 s for *The Chemical History of a Candle*, and 3.5–3.9 s for the two longest texts, *On the Origin of Species* and *The Education of Henry Adams*.
 
 Supported book IDs in the reader:
 
@@ -139,6 +157,7 @@ Bookora/
 │   └── reader.js           In-browser reader engine and pagination
 ├── assets/
 │   ├── texts/              Bundled public-domain reader texts
+│   │   ├── openings/       First-section files for the immediate opening page
 │   │   ├── alice-wonderland.json
 │   │   ├── the-time-machine.json
 │   │   ├── the-yellow-wallpaper.json
@@ -213,6 +232,7 @@ Stage 3, Stage 4, and Stage 5a were checked with Chrome DevTools Protocol harnes
 - **Stage 5a reader check:** 48 checks across the three added titles — table-of-contents counts (15, 8, 37), section labels, opening headings, final passages, word counts, contributor metadata, absence of source artifacts, no horizontal overflow, no console errors, and edition-card metadata. Result: 48 / 48.
 - **Stage 5a smoke:** 147 checks across all twelve reader titles and their edition cards, plus Home, About, and Explore. Result: 147 / 147.
 - **Stage 5a responsive:** the three added titles at 390×844 and 768×1024, single-page layout and Contents dialog at 390, and edition cards at 390. Result: 48 / 48.
+- **Reader performance:** Lighthouse 13.6 mobile (default simulated throttling) on all twelve reader URLs. Final pass: performance 99–100 (ten titles at 100 and two at 99), LCP 1.06–1.12 s, TBT 0–53 ms, CLS 0. Repeat runs of the two 99s reached 100. Local timings: first page under 0.2 s; full pagination about 0.7 s for Alice, 1.7 s for Candle, and 3.5–3.9 s for the two longest texts.
 - **Text integrity:** the complete Alice opening and closing lines, Wallpaper length, and Time Machine section/Epilogue records were checked against the bundled JSON and rendered pages. The six Stage 4c and three Stage 5a texts were rebuilt from UTF-8 Project Gutenberg sources with their real chapter, story, book, and lecture divisions.
 - **Responsive:** Reader at 320, 390, 768, 800×900, 1024, and 1440 px; edition pages at 1440 px; Home, About, and Explore at multiple widths. Result: 0 horizontal overflow and no broken images.
 

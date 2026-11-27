@@ -12,8 +12,29 @@
   <link rel="preload" href="assets/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/reader.css">
+  <style>
+    html { background-color: #F5F2EA; }
+    .reader-booting::after {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: min(230px, 58vw);
+      height: 2px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(122, 112, 96, 0.3);
+      animation: reader-boot-pulse 1.1s ease-in-out infinite;
+    }
+    @keyframes reader-boot-pulse {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 0.9; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reader-booting::after { animation: none; }
+    }
+  </style>
 </head>
-<body class="reader-body">
+<body class="reader-body reader-booting">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
